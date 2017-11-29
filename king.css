@@ -46,66 +46,45 @@ body {
     align-items: center;
 }
 
-.card-holder > div > div {
-    height: 90%;
-    width: 70%;
-    background-image: url(symbols.png);
-    background-size: 400%;
-}
-div.group-five {
-    background-color: #ffb3ba;
-}
-div.group-five > div {
-    background-position: 69% 49%;
-}
-div.group-four {
-    background-color: #ffffba;
-}
-div.group-four > div {
-    background-position: 68% 136%;
-}
-div.group-six {
-    background-color: #d7aeff;
-}
-div.group-six > div {
-    background-position: 31% 196%;
-}
-div.group-two  {
-    background-color: #bae1ff;
-}
-div.group-two > div {
-    background-position: 69% 246%;
-}
-div.group-eight  {
-    background-color: white;
-}
-div.group-eight > div {
-    background-position: 127% 138%;
-    opacity: .5;
-    filter: grayscale(100);
-}
-div.group-seven  {
-    background-color: #ffdfba;
-}
-div.group-seven > div {
-    background-position: 164% 136%;
-}
-div.group-three  {
-    background-color: #baffc9;
-}
-div.group-three > div {
-    background-position: 164% 105%;
-}
-div.pawn  {
-    background-color: rebeccapurple;
-}
-div.pawn > div {
-    background-image: url(https://png.icons8.com/?id=13728&size=280);
-    background-size: contain;
+div.pawn,
+div[class^="group-"] {
+    background-size: auto 90%;
     background-repeat: no-repeat;
     background-position: center;
 }
-div.removed {
+div.group-five {
+    background-color: #ffb3ba;
+    background-image: url('img/sym-red.png');
+}
+div.group-four {
+    background-color: #ffffba;
+    background-image: url('img/sym-yellow.png');
+}
+div.group-six {
+    background-color: #d7aeff;
+    background-image: url('img/sym-purple.png');
+}
+div.group-two  {
+    background-color: #bae1ff;
+    background-image: url('img/sym-blue.png');
+}
+div.group-eight  {
+    background-color: white;
+    background-image: url('img/sym-grey.png');
+}
+div.group-seven  {
+    background-color: #ffdfba;
+    background-image: url('img/sym-orange.png');
+}
+div.group-three  {
+    background-color: #baffc9;
+    background-image: url('img/sym-green.png');
+}
+div.pawn  {
+    background-color: rebeccapurple;
+    background-image: url('img/crown.png');
+}
+.card-holder div.removed {
     opacity: 0;
     pointer-events: none;
 }
@@ -122,14 +101,19 @@ div.removed {
     color: white;
 }
 .button-bar .button {
-	background: skyblue;
-	margin-top: 9%;
+    background: #0e455c;
     text-transform: uppercase;
-    padding: 6px 8px;
-    font-size: 14px;
+    padding: 12px 8px;
     border-radius: 3px;
     cursor: pointer;
-    color: black;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid white;
+    bottom: 20px;
+    position: absolute;
+    width: calc(100% - 40px);
+    left: 20px;
 }
 .button-bar .help {
 	position: absolute;
@@ -146,10 +130,10 @@ div.removed {
 
 .scores {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 .scores .player {
-    padding: 10px 10px 40px;
+    padding: 10px 10px 20px;
     position: relative;
 }
 .scores .player:before {
@@ -175,28 +159,64 @@ div.removed {
     color: inherit;
     background: inherit;
     border: 0;
-    font-size: 22px;
-    margin: 10px 0;
+    font-size: 32px;
+    margin: 10px 0 15px;
+    width: 100%;
 }
 .scores .player .tokens {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    position: relative;
 }
 .scores .player .tokens > div {
     width: 32px;
+    height: auto;
+    padding-top: 20px;
+}
+.scores .player .tokens > div > div {
+    width: 32px;
     height: 32px;
-    position: relative;
+    border: 1px solid #444;
     border-radius: 4px;
+    margin-top: -20px;
+}
+
+.scores .player .tokens > div[data-count="0"] {
+    opacity: 0;
 }
 .scores .player .tokens > div:after {
     content: attr(data-count);
-    position: absolute;
-    top: 40px;
     text-align: center;
     width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 24px;
 }
 .scores .player .tokens > div.lead:after {
     font-weight: bold;
     color: goldenrod;
+}
+
+.card-holder .winner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    background: rgba(255,255,255,0.8);
+    font-size: 50px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: rebeccapurple;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    line-height: 140%;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+.card-holder .winner.show {
+    opacity: 1;
 }

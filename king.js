@@ -8,27 +8,29 @@ $(function(){
         var thisCard = $(this);
         if( thisCard.hasClass('up') || thisCard.hasClass('down') || thisCard.hasClass('left') || thisCard.hasClass('right') ){ 
             var group = thisCard.attr('class').split(' ')[0];
-            var actPlayerGroup = $('.player.active').find('.'+group);
-            var oppPlayerGroup = $('.player:not(.active)').find('.'+group);
+            var actPlayerGroup = $('.player.active').find('div[data-group="'+group+'"]');
+            var oppPlayerGroup = $('.player:not(.active)').find('div[data-group="'+group+'"]');
             var direction = thisCard.attr('class').split(' ')[1];
-            var cardLine = $('.'+direction).get();
+            var cardLine = $('.card-holder').find('.'+direction).get();
             var newPawn = thisCard;
             if( direction == 'up' || direction == 'left' ){
                 cardLine = cardLine.reverse();
             }
+
             for (var x = 0; x<cardLine.length; x++){
                 var checkCard = $(cardLine[x]);
                 if(checkCard.hasClass(group)){
-                   actPlayerGroup.attr('data-count', 
+                    actPlayerGroup.attr('data-count', 
                         parseInt(actPlayerGroup.attr('data-count')) + 1 
                     );
                     checkCard.addClass('removed');
+                    var addCard = checkCard.clone();
+                    addCard.prependTo(actPlayerGroup);
                     newPawn = checkCard;
                 }
             }
 
             if( actPlayerGroup.attr('data-count') >= oppPlayerGroup.attr('data-count') ){
-                console.log('she takes the lead!');
                 actPlayerGroup.addClass('lead');
                 oppPlayerGroup.removeClass('lead');
             }
@@ -42,6 +44,7 @@ $(function(){
     });
     $('.new-game').click( function(){
         $('.player .tokens > div').attr('data-count',0).removeClass('lead');
+        $('.tokens > div').empty();
         newDeck();
     });
 
@@ -85,7 +88,7 @@ $(function(){
         for (var i = 0; i<cards.length; i++){
             cardDiv = $('<div>', { 
                 'class': cards[i]
-            }).append( $('<div>') );
+            });
             cardDiv.appendTo( cardHolder );
         }
 
@@ -97,6 +100,7 @@ $(function(){
         var pawn = $('.pawn');
         var pos = pawn.offset();
         var hitPawn = false;
+        var moveAvailable = false;
         $('.card-holder > div:not(".removed")').each( function(a,b){
             card = $(b);
             if( card.hasClass('pawn') ){
@@ -107,13 +111,61 @@ $(function(){
                 } else {
                     card.addClass('up');
                 }
+                moveAvailable = true;
             } else if( card.offset().top == pos.top ){
                 if( hitPawn ) {
                     card.addClass('right');
                 } else {
                     card.addClass('left');
                 }
+                moveAvailable = true;
             }
         });
+        if(moveAvailable == false){
+            var actPlayerArea = $('.player.active');
+            var oppPlayerArea = $('.player:not(.active)');
+            var actWinCount = actPlayerArea.find('.lead').length;
+            var oppWinCount = oppPlayerArea.find('.lead').length;
+            var winnerName = "No one";
+            if(actWinCount > oppWinCount){
+                winnerName = actPlayerArea.find('.name input').val();
+            } else if(actWinCount < oppWinCount){
+                winnerName = oppPlayerArea.find('.name input').val();
+            } else {
+                var actTieCount = actPlayerArea.find('div[data-group="group-eight"] > div').length;
+                var oppTieCount = oppPlayerArea.find('div[data-group="group-eight"] > div').length;
+                if(actTieCount > oppTieCount){
+                    winnerName = actPlayerArea.find('.name input').val();
+                } else if(actTieCount < oppTieCount){
+                    winnerName = oppPlayerArea.find('.name input').val();
+                } else {
+                    var actTieCount = actPlayerArea.find('div[data-group="group-seven"] > div').length;
+                    var oppTieCount = oppPlayerArea.find('div[data-group="group-seven"] > div').length;
+                    if(actTieCount > oppTieCount){
+                        winnerName = actPlayerArea.find('.name input').val();
+                    } else if(actTieCount < oppTieCount){
+                        winnerName = oppPlayerArea.find('.name input').val();
+                    } else {
+                        var actTieCount = actPlayerArea.find('div[data-group="group-six"] > div').length;
+                        var oppTieCount = oppPlayerArea.find('div[data-group="group-six"] > div').length;
+                        if(actTieCount > oppTieCount){
+                            winnerName = actPlayerArea.find('.name input').val();
+                        } else if(actTieCount < oppTieCount){
+                            winnerName = oppPlayerArea.find('.name input').val();
+                        };
+                    }
+
+                }
+            }
+            winnerDiv = $('<div>', { 
+                'class': 'winner',
+                'html': winnerName + ' is<br/>the winner!'
+            });
+            winnerDiv.appendTo( cardHolder );
+
+            setTimeout( function(){
+                winnerDiv.addClass('show');
+            }, 1000);
+        }
     }
 });
