@@ -255,4 +255,7 @@ div.pawn  {
     .card-holder {
         width: calc(100vw - 260px);
     }
+    .card-holder .winner {
+        font-size: 40px;
+    }
 }
