@@ -1,6 +1,6 @@
 
 $(function(){
-    $('html').height(window.innerHeight);
+    $(window).resize();
     var cardHolder = $('.card-holder');
     var cards;
     newDeck();
@@ -169,4 +169,7 @@ $(function(){
             }, 1000);
         }
     }
+});
+$(window).resize(function(){
+    $('html').height(window.innerHeight);
 });

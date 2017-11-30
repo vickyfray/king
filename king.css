@@ -24,7 +24,7 @@ body {
 }
 
 .card-holder {
-    height: 100vh;
+    height: 100%;
 	width: calc(100vw - 300px);
     display: flex;
     flex-wrap: wrap;
@@ -39,7 +39,7 @@ body {
     border: 2px solid #444;
     border-radius: 10px;
     width: calc(88% / 6);
-    height: calc(80vh / 6);
+    height: calc(88% / 6);
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -219,4 +219,40 @@ div.pawn  {
 }
 .card-holder .winner.show {
     opacity: 1;
+}
+
+@media screen and ( max-width: 760px ){ /* mobile landscape */
+    .scores {
+        margin-top: 0;
+    }
+    .button-bar {
+        width: 260px;
+        padding: 0;
+    }
+    .button-bar .button {
+        padding: 10px 8px;
+        font-size: 20px;
+        bottom: 5px;
+        width: calc(100% - 10px);
+        left: 5px;
+    }
+    .scores .player .name input {
+        font-size: 20px;
+        margin: 0 0 10px;
+    }
+    .scores .player .tokens > div:after {
+        margin-top: 4px;
+        font-size: 16px;
+    }
+    .scores .player {
+        padding-bottom: 10px;
+    }
+    .scores .player .tokens > div > div {
+        width: 30px;
+        height: 30px;
+        margin-top: -22px;
+    }
+    .card-holder {
+        width: calc(100vw - 260px);
+    }
 }
