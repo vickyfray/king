@@ -1,7 +1,8 @@
-var cards;
 
 $(function(){
+    $('html').height(window.innerHeight);
     var cardHolder = $('.card-holder');
+    var cards;
     newDeck();
 
     $('.card-holder').on('click', '> div', function(){
