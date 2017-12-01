@@ -24,15 +24,15 @@ body {
 }
 
 .card-holder {
-    height: 100%;
-	width: calc(100vw - 300px);
+    height: calc(100% - 280px);
+	width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     padding: 1%;
     position: absolute;
-    top: 0;
+    top: 120px;
     right: 0;
 }
 .card-holder > div {
@@ -89,54 +89,39 @@ div.pawn  {
     pointer-events: none;
 }
 
-.button-bar {
+.player {
     position: absolute;
     top: 0;
     left: 0;
-	width: 300px;
-    height: 100%;
+    width: 100%;
+    height: 120px;
     background: black;
-    padding: 0 8px;
-    border-right: 1px solid #444;
     color: white;
+    padding-top: 13px;
 }
-.button-bar .button {
-    background: #0e455c;
-    text-transform: uppercase;
-    padding: 12px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    border: 2px solid white;
-    bottom: 20px;
+.player .name,
+.player .name input {
+    display: none;
+}
+.player.active {
+    top: auto;
+    bottom: 0;
+    background: rebeccapurple;
+}
+.player.active .name {
+    font-size: 26px;
     position: absolute;
-    width: calc(100% - 40px);
-    left: 20px;
-}
-.button-bar .help {
-	position: absolute;
-    right: 10px;
-    border-radius: 50%;
-    text-decoration: none;
-    color: white;
-	background: darkblue;
-    padding: 2px 7px;
-    border: 2px solid white;
-    font-weight: bold;
-    font-size: 20px;
+    bottom: 99%;
+    width: 100%;
+    background: rebeccapurple;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.scores {
-    width: 100%;
-    margin-top: 20px;
-}
-.scores .player {
-    padding: 10px 10px 20px;
-    position: relative;
-}
-.scores .player:before {
+
+/*.player:before {
     content: '';
     position: absolute;
     top: 0%;
@@ -146,54 +131,44 @@ div.pawn  {
     background: rebeccapurple;
     transition: top 0.5s, bottom 0.5s;
 }
-.scores .player.player-one:not(.active):before {
+.player.player-one:not(.active):before {
     top: 100%;
 }
-.scores .player.player-two:not(.active):before {
+.player.player-two:not(.active):before {
     bottom: 100%;
-}
-.scores .player .name input {
-    position: relative;
-}
-.scores .player .name input {
-    color: inherit;
-    background: inherit;
-    border: 0;
-    font-size: 32px;
-    margin: 10px 0 15px;
-    width: 100%;
-}
-.scores .player .tokens {
+}*/
+.player .tokens {
     display: flex;
     width: 100%;
     justify-content: space-between;
     position: relative;
+    padding-left: 50px;
 }
-.scores .player .tokens > div {
-    width: 32px;
-    height: auto;
-    padding-top: 20px;
+.player .tokens > div {
 }
-.scores .player .tokens > div > div {
-    width: 32px;
-    height: 32px;
+.player .tokens > div > div {
+    width: 60px;
+    height: 60px;
     border: 1px solid #444;
     border-radius: 4px;
-    margin-top: -20px;
+    margin-left: -40px;
+    float: left;
 }
 
-.scores .player .tokens > div[data-count="0"] {
+.player .tokens > div[data-count="0"] {
     opacity: 0;
 }
-.scores .player .tokens > div:after {
+.player .tokens > div:after {
     content: attr(data-count);
-    text-align: center;
-    width: 100%;
     display: inline-block;
-    margin-top: 10px;
+    position: relative;
+    left: -25px;
+    top: 10px;
+    width: 100%;
+    text-align: center;
     font-size: 24px;
 }
-.scores .player .tokens > div.lead:after {
+.player .tokens > div.lead:after {
     font-weight: bold;
     color: goldenrod;
 }
@@ -222,40 +197,40 @@ div.pawn  {
 }
 
 @media screen and ( max-width: 760px ){ /* mobile landscape */
-    .scores {
-        margin-top: 0;
+    .player {
+        height: 100px;
+        padding-top: 16px;
     }
-    .button-bar {
-        width: 260px;
-        padding: 0;
+    .player .tokens {
+        padding-left: 32px;
     }
-    .button-bar .button {
-        padding: 10px 8px;
-        font-size: 20px;
-        bottom: 5px;
-        width: calc(100% - 10px);
-        left: 5px;
+    .player .tokens > div:after {
+        content: attr(data-count);
+        display: inline-block;
+        position: relative;
+        left: -16px;
+        top: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
     }
-    .scores .player .name input {
-        font-size: 20px;
-        margin: 0 0 10px;
-    }
-    .scores .player .tokens > div:after {
-        margin-top: 4px;
-        font-size: 16px;
-    }
-    .scores .player {
-        padding-bottom: 10px;
-    }
-    .scores .player .tokens > div > div {
-        width: 30px;
+    .player .tokens > div > div {
+        width: 29px;
         height: 30px;
-        margin-top: -22px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        margin-left: -20px;
+        float: left;
     }
-    .card-holder {
-        width: calc(100vw - 260px);
+    .player .tokens > div[data-count="0"] {
+        width: 1px !important;
+    }
+
+   .card-holder {
+        height: calc(100% - 240px);
+        top: 100px;
     }
     .card-holder .winner {
-        font-size: 40px;
+        font-size: 36px;
     }
 }

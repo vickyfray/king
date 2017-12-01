@@ -5,6 +5,13 @@ $(function(){
     var cards;
     newDeck();
 
+    var playerOne = prompt("Name Player 1", "Vicky");
+    $('.player-one .name input').val(playerOne);
+    $('.player-one .name span').html(playerOne);
+    var playerTwo = prompt("Name Player 2", "Jamie");
+    $('.player-two .name input').val(playerTwo);
+    $('.player-two .name span').html(playerTwo);
+
     $('.card-holder').on('click', '> div', function(){
         var thisCard = $(this);
         if( thisCard.hasClass('up') || thisCard.hasClass('down') || thisCard.hasClass('left') || thisCard.hasClass('right') ){ 
