@@ -5,18 +5,18 @@
 html {
 	height: 100%;
 	box-sizing: border-box;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#959595+0,0d0d0d+46,010101+50,0a0a0a+53,4e4e4e+76,383838+87,1b1b1b+100;Black+Gloss+Pipe */
-    background: #959595; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #959595 0%, #0d0d0d 46%, #010101 50%, #0a0a0a 53%, #4e4e4e 76%, #383838 87%, #1b1b1b 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #959595 0%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#4e4e4e 76%,#383838 87%,#1b1b1b 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #959595 0%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#4e4e4e 76%,#383838 87%,#1b1b1b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#959595', endColorstr='#1b1b1b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: black;
 }
 body {
-	margin: 0;
-	transition: background 0.3s;
-	height: 100%;
-	font-family: "Trebuchet", "Arial", sans-serif;
+    margin: 0;
+    transition: background 0.3s;
+    height: 100%;
+    font-family: "Trebuchet", "Arial", sans-serif;
+    opacity: 1;
+    transition: opacity .2s;
+}
+body.player-change {
+	opacity: .5;
 }
 
 .clearfix {
@@ -34,6 +34,11 @@ body {
     position: absolute;
     top: 120px;
     right: 0;
+    background: black;
+    border: 2px solid #444;
+}
+.card-holder.wait {
+    pointer-events: none;
 }
 .card-holder > div {
     border: 2px solid #444;
@@ -106,18 +111,23 @@ div.pawn  {
 .player.active {
     top: auto;
     bottom: 0;
-    background: rebeccapurple;
 }
 .player.active .name {
     font-size: 26px;
     position: absolute;
-    bottom: 99%;
+    bottom: 100%;
     width: 100%;
-    background: rebeccapurple;
+    background: inherit;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.player.player-one {
+    background: #0d58ae;
+}
+.player.player-two {
+    background: #a70202;
 }
 
 
@@ -189,11 +199,27 @@ div.pawn  {
     font-weight: bold;
     text-align: center;
     line-height: 140%;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     transition: opacity 0.8s;
 }
 .card-holder .winner.show {
     opacity: 1;
+}
+.new-game {
+    padding: 0 22px;
+    font-family: sans-serif;
+    color: white;
+    border: 3px solid white;
+    border-radius: 4px;
+    background: #006e80;
+    margin-top: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 @media screen and ( max-width: 760px ){ /* mobile landscape */
@@ -232,5 +258,8 @@ div.pawn  {
     }
     .card-holder .winner {
         font-size: 36px;
+    }
+    .new-game {
+        font-size: 22px;
     }
 }

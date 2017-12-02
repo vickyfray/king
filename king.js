@@ -46,11 +46,20 @@ $(function(){
             $('.pawn').addClass('removed').removeClass('pawn');
             newPawn.attr('class','pawn');
             checkPawn();
-            $('.player').toggleClass('active');
+
+            $(cardHolder).addClass('wait');
+            setTimeout( function() {
+                $('body').addClass('player-change');
+                setTimeout( function() {
+                    $('.player').toggleClass('active');
+                    $(cardHolder).removeClass('wait');
+                    $('body').removeClass('player-change');
+                }, 200);
+            }, 1000);
         }
 
     });
-    $('.new-game').click( function(){
+    $(cardHolder).on('click', '.new-game', function(){
         $('.player .tokens > div').attr('data-count',0).removeClass('lead');
         $('.tokens > div').empty();
         newDeck();
@@ -170,6 +179,12 @@ $(function(){
                 'html': winnerName + ' is<br/>the winner!'
             });
             winnerDiv.appendTo( cardHolder );
+
+            newGame = $('<div>', { 
+                'class': 'new-game',
+                'html': 'New Game'
+            });
+            newGame.appendTo( winnerDiv );
 
             setTimeout( function(){
                 winnerDiv.addClass('show');
