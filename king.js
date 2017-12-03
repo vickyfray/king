@@ -55,7 +55,7 @@ $(function(){
                     $(cardHolder).removeClass('wait');
                     $('body').removeClass('player-change');
                 }, 200);
-            }, 1000);
+            }, 800);
         }
 
     });
