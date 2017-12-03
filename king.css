@@ -224,8 +224,8 @@ div.pawn  {
 
 @media screen and ( max-width: 760px ){ /* mobile landscape */
     .player {
-        height: 100px;
-        padding-top: 16px;
+        height: 86px;
+        padding-top: 12px;
     }
     .player .tokens {
         padding-left: 32px;
@@ -253,8 +253,8 @@ div.pawn  {
     }
 
    .card-holder {
-        height: calc(100% - 240px);
-        top: 100px;
+        height: calc(100% - 212px);
+        top: 86px;
     }
     .card-holder .winner {
         font-size: 36px;
